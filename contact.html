@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Contact - Trà Sữa MoMo</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<header class="header">
+  <div class="nav-inner">
+    <div class="logo-wrap">
+      <div class="logo-dot"></div>
+      <span>Trà Sữa MoMo</span>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+      <a href="admin-products.html" class="badge">Admin</a>
+      <button id="open-cart" class="cart-btn">
+        🛒 <span id="cart-count">0</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <div class="section-header">
+    <div>
+      <h2>Liên hệ MoMo</h2>
+      <p>Cần hỗ trợ? Nhắn MoMo là có liền 🧋</p>
+    </div>
+  </div>
+  <section class="card">
+    <form onsubmit="event.preventDefault();alert('Cảm ơn bạn, MoMo đã nhận được lời nhắn!');">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <input required placeholder="Họ tên" style="flex:1;padding:8px;border-radius:8px;border:1px solid #eee;"/>
+        <input required placeholder="Số điện thoại" style="flex:1;padding:8px;border-radius:8px;border:1px solid #eee;"/>
+      </div>
+      <input required placeholder="Email" style="width:100%;margin-top:8px;padding:8px;border-radius:8px;border:1px solid #eee;"/>
+      <textarea required placeholder="Lời nhắn gửi MoMo..." style="width:100%;margin-top:8px;padding:8px;border-radius:8px;border:1px solid #eee;min-height:100px;"></textarea>
+      <div style="margin-top:10px;">
+        <button class="btn-primary" type="submit">Gửi cho MoMo</button>
+      </div>
+    </form>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <strong>Trà Sữa MoMo</strong><br/>
+      65 Nguyễn Biểu, P1, Q5, TP.HCM<br/>
+      Hotline: 090-xxx-xxxx
+    </div>
+    <div style="text-align:right;">
+      Follow: Facebook · TikTok<br/>
+      Giờ mở cửa: 8:00 - 22:00
+    </div>
+  </div>
+</footer>
+
+
+<!-- Commit: Nút mở/đóng cửa sổ chat MoMo Bot -->
+<button id="chatbot-btn">💬</button>
+
+<!-- Commit: Cửa sổ chat MoMo Bot -->
+<div id="chat-window">
+  <div id="chat-header">
+    <div class="chat-header-left">
+      <div class="bot-avatar">🧋</div>
+      <div>
+        <div class="bot-name">MoMo Bot</div>
+        <div class="bot-sub">bé MoMo online nè 🤗</div>
+      </div>
+    </div>
+    <button id="voice-toggle" title="Bật/Tắt giọng nói">🔈</button>
+  </div>
+
+  <div id="chat-body">
+    <div class="bot-msg msg-with-avatar">
+      <div class="bot-avatar-small">🧋</div>
+      <div class="msg-bubble">Dạ bé MoMo chàooo ~ Bạn muốn hỏi gì hong nè? 💗</div>
+    </div>
+
+    <div id="faq-suggestions"></div>
+
+    <div id="typing-indicator" class="typing" style="display:none;">
+      MoMo đang gõ trả lời cho bạn ...
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+  </div>
+
+  <div id="chat-input-box">
+    <input id="chat-input" placeholder="Nhắn gì đó với bé MoMo nè..." />
+    <button id="chat-send">Gửi</button>
+  </div>
+</div>
+
+<link rel="stylesheet" href="chatbot.css">
+<script src="chatbot.js"></script>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,57 +1,202 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=<h2>Sign in/up Form</h2>
-    <div class="container" id="container">
-        <div class="form-container sign-up-container">
-            <form action="#">
-                <h1>Create Account</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <span>or use your email for registration</span>
-                <input type="text" placeholder="Name" />
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <button>Sign Up</button>
-            </form>
-        </div>
-        <div class="form-container sign-in-container">
-            <form action="#">
-                <h1>Sign in</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <span>or use your account</span>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <a href="#">Forgot your password?</a>
-                <button>Sign In</button>
-            </form>
-        </div>
-        <div class="overlay-container">
-            <div class="overlay">
-                <div class="overlay-panel overlay-left">
-                    <h1>Welcome Back!</h1>
-                    <p>To keep connected with us please login with your personal info</p>
-                    <button class="ghost" id="signIn">Sign In</button>
-                </div>
-                <div class="overlay-panel overlay-right">
-                    <h1>Hello, Friend!</h1>
-                    <p>Enter your personal details and start journey with us</p>
-                    <button class="ghost" id="signUp">Sign Up</button>
-                </div>
-            </div>
-        </div>
-    </div>, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Trà Sữa MoMo - Home</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-    
+
+<header class="header">
+  <div class="nav-inner">
+    <div class="logo-wrap">
+      <div class="logo-dot"></div>
+      <span>Trà Sữa MoMo</span>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+      <a href="admin-products.html" class="badge">Admin</a>
+      <button id="open-cart" class="cart-btn">
+        🛒 <span id="cart-count">0</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="hero-left">
+      <h1 class="hero-title">Trà Sữa MoMo — Yêu từ ngụm đầu tiên 🧋</h1>
+      <p class="hero-desc">Đậm vị trà, béo vừa phải, topping giòn vui miệng. Menu hơn 20 món cho bạn tha hồ đổi vị mỗi ngày.</p>
+      <div class="hero-tags">
+        <span class="tag">Milk tea · Fruit tea</span>
+        <span class="tag">20+ topping</span>
+        <span class="tag">Giao siêu nhanh</span>
+      </div>
+      <div class="hero-buttons">
+        <button class="btn-primary" onclick="location.href='menu.html'">Xem menu</button>
+        <button class="btn-secondary" onclick="toggleMiniCart()">Xem giỏ hàng</button>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="assets/img/momo_signature.svg" alt="Trà Sữa MoMo">
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div>
+        <h2>Best-seller nhà MoMo</h2>
+        <p>Những ly trà được order nhiều nhất từ khách 💗</p>
+      </div>
+      <a href="menu.html" class="card-sub">Xem toàn bộ menu →</a>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <span class="card-tag">Best seller</span>
+        <img src="assets/img/milk_tea_2.svg" class="card-img" alt="">
+        <h3 class="card-title">Trà Sữa Trân Châu Đen</h3>
+        <p class="card-sub">Đậm vị trà, trân châu đen dai mềm, chuẩn vị trà sữa quốc dân.</p>
+        <div class="card-bottom">
+          <span class="price">55.000đ</span>
+          <button class="btn-primary" onclick="addToCart('2','Trà Sữa Trân Châu Đen',55000,'assets/img/milk_tea_2.svg')">Thêm</button>
+        </div>
+      </article>
+      <article class="card">
+        <span class="card-tag">Signature</span>
+        <img src="assets/img/momo_signature.svg" class="card-img" alt="">
+        <h3 class="card-title">Trà Sữa MoMo Signature</h3>
+        <p class="card-sub">Công thức đặc biệt chỉ có tại MoMo, béo vừa phải, ít ngấy.</p>
+        <div class="card-bottom">
+          <span class="price">60.000đ</span>
+          <button class="btn-primary" onclick="addToCart('1','Trà Sữa MoMo',60000,'assets/img/momo_signature.svg')">Thêm</button>
+        </div>
+      </article>
+      <article class="card">
+        <span class="card-tag">Hot</span>
+        <img src="assets/img/sig_1.svg" class="card-img" alt="">
+        <h3 class="card-title">Sữa Tươi Trân Châu Đường Đen</h3>
+        <p class="card-sub">Sữa tươi lạnh, trân châu đường đen dẻo mềm, thơm lừng.</p>
+        <div class="card-bottom">
+          <span class="price">65.000đ</span>
+          <button class="btn-primary" onclick="addToCart('19','Sữa Tươi Trân Châu Đường Đen',65000,'assets/img/sig_1.svg')">Thêm</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div>
+        <h2>Topping xịn xò</h2>
+        <p>Thêm topping cho ly trà sữa vui miệng hơn nè</p>
+      </div>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <img src="assets/img/topping_1.svg" class="card-img" alt="">
+        <h3 class="card-title">Trân Châu Đen</h3>
+        <p class="card-sub">Dai mềm, ngọt nhẹ, hợp mọi loại trà sữa.</p>
+        <div class="card-bottom">
+          <span class="price">12.000đ</span>
+          <button class="btn-primary" onclick="addToCart('21','Trân Châu Đen',12000,'assets/img/topping_1.svg')">Thêm</button>
+        </div>
+      </article>
+      <article class="card">
+        <img src="assets/img/topping_2.svg" class="card-img" alt="">
+        <h3 class="card-title">Pudding Trứng</h3>
+        <p class="card-sub">Mềm mịn, thơm trứng, béo nhẹ, siêu hợp matcha.</p>
+        <div class="card-bottom">
+          <span class="price">15.000đ</span>
+          <button class="btn-primary" onclick="addToCart('22','Pudding Trứng',15000,'assets/img/topping_2.svg')">Thêm</button>
+        </div>
+      </article>
+      <article class="card">
+        <img src="assets/img/topping_4.svg" class="card-img" alt="">
+        <h3 class="card-title">Popping Boba</h3>
+        <p class="card-sub">Hạt nổ trong miệng, vị trái cây chua ngọt vui miệng.</p>
+        <div class="card-bottom">
+          <span class="price">18.000đ</span>
+          <button class="btn-primary" onclick="addToCart('24','Popping Boba',18000,'assets/img/topping_4.svg')">Thêm</button>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<div id="mini-cart" class="mini-cart">
+  <div class="mini-cart-header">
+    <strong>Giỏ hàng</strong>
+    <button class="btn-text" onclick="toggleMiniCart()">Đóng</button>
+  </div>
+  <div class="mini-cart-items"></div>
+  <div class="cart-actions">
+    <span class="card-sub">Tổng: <strong class="mini-cart-total">0đ</strong></span>
+    <button class="btn-text" onclick="clearCart()">Xóa hết</button>
+    <button class="btn-primary" onclick="checkoutOrder()">Thanh toán</button>
+  </div>
+</div>
+
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <strong>Trà Sữa MoMo</strong><br/>
+      65 Nguyễn Biểu, P1, Q5, TP.HCM<br/>
+      Hotline: 090-xxx-xxxx
+    </div>
+    <div style="text-align:right;">
+      Follow: Facebook · TikTok<br/>
+      Giờ mở cửa: 8:00 - 22:00
+    </div>
+  </div>
+</footer>
+
+
+<!-- Commit: Nút mở/đóng cửa sổ chat MoMo Bot -->
+<button id="chatbot-btn">💬</button>
+
+<!-- Commit: Cửa sổ chat MoMo Bot -->
+<div id="chat-window">
+  <div id="chat-header">
+    <div class="chat-header-left">
+      <div class="bot-avatar">🧋</div>
+      <div>
+        <div class="bot-name">MoMo Bot</div>
+        <div class="bot-sub">bé MoMo online nè 🤗</div>
+      </div>
+    </div>
+    <button id="voice-toggle" title="Bật/Tắt giọng nói">🔈</button>
+  </div>
+
+  <div id="chat-body">
+    <div class="bot-msg msg-with-avatar">
+      <div class="bot-avatar-small">🧋</div>
+      <div class="msg-bubble">Dạ bé MoMo chàooo ~ Bạn muốn hỏi gì hong nè? 💗</div>
+    </div>
+
+    <div id="faq-suggestions"></div>
+
+    <div id="typing-indicator" class="typing" style="display:none;">
+      MoMo đang gõ trả lời cho bạn ...
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+  </div>
+
+  <div id="chat-input-box">
+    <input id="chat-input" placeholder="Nhắn gì đó với bé MoMo nè..." />
+    <button id="chat-send">Gửi</button>
+  </div>
+</div>
+
+<link rel="stylesheet" href="chatbot.css">
+<script src="chatbot.js"></script>
+
+<script src="script.js"></script>
 </body>
 </html>

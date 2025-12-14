@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Admin Orders - Trà Sữa MoMo</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<header class="header">
+  <div class="nav-inner">
+    <div class="logo-wrap">
+      <div class="logo-dot"></div>
+      <span>Trà Sữa MoMo</span>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+      <a href="admin-products.html" class="badge">Admin</a>
+      <button id="open-cart" class="cart-btn">
+        🛒 <span id="cart-count">0</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <div class="section-header">
+    <div>
+      <h2>Admin đơn hàng</h2>
+      <p>Theo dõi & cập nhật trạng thái đơn</p>
+    </div>
+  </div>
+  <section class="card">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th><th>Thời gian</th><th>Tổng</th><th>Trạng thái</th><th>Chi tiết</th><th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="order-body"></tbody>
+    </table>
+    <p class="card-sub" id="order-msg" style="margin-top:8px;"></p>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <strong>Trà Sữa MoMo</strong><br/>
+      65 Nguyễn Biểu, P1, Q5, TP.HCM<br/>
+      Hotline: 090-xxx-xxxx
+    </div>
+    <div style="text-align:right;">
+      Follow: Facebook · TikTok<br/>
+      Giờ mở cửa: 8:00 - 22:00
+    </div>
+  </div>
+</footer>
+
+
+<!-- Commit: Nút mở/đóng cửa sổ chat MoMo Bot -->
+<button id="chatbot-btn">💬</button>
+
+<!-- Commit: Cửa sổ chat MoMo Bot -->
+<div id="chat-window">
+  <div id="chat-header">
+    <div class="chat-header-left">
+      <div class="bot-avatar">🧋</div>
+      <div>
+        <div class="bot-name">MoMo Bot</div>
+        <div class="bot-sub">bé MoMo online nè 🤗</div>
+      </div>
+    </div>
+    <button id="voice-toggle" title="Bật/Tắt giọng nói">🔈</button>
+  </div>
+
+  <div id="chat-body">
+    <div class="bot-msg msg-with-avatar">
+      <div class="bot-avatar-small">🧋</div>
+      <div class="msg-bubble">Dạ bé MoMo chàooo ~ Bạn muốn hỏi gì hong nè? 💗</div>
+    </div>
+
+    <div id="faq-suggestions"></div>
+
+    <div id="typing-indicator" class="typing" style="display:none;">
+      MoMo đang gõ trả lời cho bạn ...
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+  </div>
+
+  <div id="chat-input-box">
+    <input id="chat-input" placeholder="Nhắn gì đó với bé MoMo nè..." />
+    <button id="chat-send">Gửi</button>
+  </div>
+</div>
+
+<link rel="stylesheet" href="chatbot.css">
+<script src="chatbot.js"></script>
+
+<script src="script.js"></script>
+<script>
+const orderBody = document.getElementById('order-body');
+const orderMsg = document.getElementById('order-msg');
+
+function setOrderMsg(text) {
+  orderMsg.textContent = text || '';
+}
+
+function renderStatus(status) {
+  if (status === 'pending') return '<span class="badge">pending</span>';
+  if (status === 'confirmed') return '<span class="badge" style="background:#4caf50;">confirmed</span>';
+  if (status === 'done') return '<span class="badge" style="background:#2196f3;">done</span>';
+  return status;
+}
+
+function loadOrders() {
+  fetch(API_URL + '/orders')
+    .then(res => res.json())
+    .then(data => {
+      orderBody.innerHTML = '';
+      data.forEach(o => {
+        const tr = document.createElement('tr');
+        const dateStr = o.createdAt ? new Date(o.createdAt).toLocaleString('vi-VN') : '';
+        const itemsStr = (o.items || []).map(i => i.name + ' x' + i.qty).join('<br/>');
+        tr.innerHTML = `
+          <td>${o.id}</td>
+          <td>${dateStr}</td>
+          <td>${(o.total || 0).toLocaleString()}đ</td>
+          <td>${renderStatus(o.status)}</td>
+          <td class="card-sub">${itemsStr}</td>
+          <td><button class="btn-text" onclick="nextStatus(${o.id}, '${o.status}')">Next trạng thái</button></td>
+        `;
+        orderBody.appendChild(tr);
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      setOrderMsg('Không tải được đơn hàng. Nhớ chạy JSON Server nha.');
+    });
+}
+
+function nextStatus(id, current) {
+  const flow = ['pending','confirmed','done'];
+  const idx = flow.indexOf(current);
+  const next = flow[(idx + 1) % flow.length];
+  fetch(API_URL + '/orders/' + id, {
+    method:'PATCH',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({ status: next })
+  })
+    .then(res => res.json())
+    .then(o => {
+      setOrderMsg('Đã cập nhật đơn #' + id + ' sang ' + o.status);
+      loadOrders();
+    })
+    .catch(err => {
+      console.error(err);
+      setOrderMsg('Không cập nhật được đơn.');
+    });
+}
+
+document.addEventListener('DOMContentLoaded', loadOrders);
+</script>
+</body>
+</html>

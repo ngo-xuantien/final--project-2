@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Menu - Trà Sữa MoMo</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<header class="header">
+  <div class="nav-inner">
+    <div class="logo-wrap">
+      <div class="logo-dot"></div>
+      <span>Trà Sữa MoMo</span>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+      <a href="admin-products.html" class="badge">Admin</a>
+      <button id="open-cart" class="cart-btn">
+        🛒 <span id="cart-count">0</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <div class="section-header">
+    <div>
+      <h2>Menu nhà MoMo</h2>
+      <p>Milk tea, fruit tea, signature & topping đủ cả 🧋</p>
+    </div>
+    <div>
+      <button class="btn-text" onclick="filterMenu('all')">Tất cả</button>
+      <button class="btn-text" onclick="filterMenu('milk')">Trà sữa</button>
+      <button class="btn-text" onclick="filterMenu('fruit')">Trà trái cây</button>
+      <button class="btn-text" onclick="filterMenu('signature')">Signature</button>
+      <button class="btn-text" onclick="filterMenu('topping')">Topping</button>
+    </div>
+  </div>
+
+  <div style="margin-bottom:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+    <span class="card-sub">Sắp xếp:</span>
+    <button class="btn-text" onclick="sortMenu('asc')">Giá tăng dần</button>
+    <button class="btn-text" onclick="sortMenu('desc')">Giá giảm dần</button>
+    <button class="btn-text" onclick="sortMenu('default')">Mặc định</button>
+  </div>
+
+  <div id="menu-grid" class="grid">
+    <!-- JS render -->
+  </div>
+</main>
+
+<div id="mini-cart" class="mini-cart">
+  <div class="mini-cart-header">
+    <strong>Giỏ hàng</strong>
+    <button class="btn-text" onclick="toggleMiniCart()">Đóng</button>
+  </div>
+  <div class="mini-cart-items"></div>
+  <div class="cart-actions">
+    <span class="card-sub">Tổng: <strong class="mini-cart-total">0đ</strong></span>
+    <button class="btn-text" onclick="clearCart()">Xóa hết</button>
+    <button class="btn-primary" onclick="checkoutOrder()">Thanh toán</button>
+  </div>
+</div>
+
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <strong>Trà Sữa MoMo</strong><br/>
+      65 Nguyễn Biểu, P1, Q5, TP.HCM<br/>
+      Hotline: 090-xxx-xxxx
+    </div>
+    <div style="text-align:right;">
+      Follow: Facebook · TikTok<br/>
+      Giờ mở cửa: 8:00 - 22:00
+    </div>
+  </div>
+</footer>
+
+
+<!-- Commit: Nút mở/đóng cửa sổ chat MoMo Bot -->
+<button id="chatbot-btn">💬</button>
+
+<!-- Commit: Cửa sổ chat MoMo Bot -->
+<div id="chat-window">
+  <div id="chat-header">
+    <div class="chat-header-left">
+      <div class="bot-avatar">🧋</div>
+      <div>
+        <div class="bot-name">MoMo Bot</div>
+        <div class="bot-sub">bé MoMo online nè 🤗</div>
+      </div>
+    </div>
+    <button id="voice-toggle" title="Bật/Tắt giọng nói">🔈</button>
+  </div>
+
+  <div id="chat-body">
+    <div class="bot-msg msg-with-avatar">
+      <div class="bot-avatar-small">🧋</div>
+      <div class="msg-bubble">Dạ bé MoMo chàooo ~ Bạn muốn hỏi gì hong nè? 💗</div>
+    </div>
+
+    <div id="faq-suggestions"></div>
+
+    <div id="typing-indicator" class="typing" style="display:none;">
+      MoMo đang gõ trả lời cho bạn ...
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+  </div>
+
+  <div id="chat-input-box">
+    <input id="chat-input" placeholder="Nhắn gì đó với bé MoMo nè..." />
+    <button id="chat-send">Gửi</button>
+  </div>
+</div>
+
+<link rel="stylesheet" href="chatbot.css">
+<script src="chatbot.js"></script>
+
+<script src="script.js"></script>
+<script>
+// Commit: Lưu toàn bộ sản phẩm lấy từ API
+let allProducts = [];
+let currentProducts = []; // Commit: danh sách sản phẩm sau khi filter/sort hiện tại
+let currentFilter = 'all';
+
+// Commit: Render danh sách sản phẩm ra grid
+function renderMenu(list) {
+  const grid = document.getElementById('menu-grid');
+  grid.innerHTML = '';
+  list.forEach(p => {
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.innerHTML = `
+      ${p.tag ? `<span class="card-tag">${p.tag}</span>` : ""}
+      <img src="${p.img}" class="card-img" alt="">
+      <h3 class="card-title">${p.name}</h3>
+      <p class="card-sub">${p.description || 'Một món siêu xịn từ nhà MoMo nè ~'}</p>
+      <div class="card-bottom">
+        <span class="price">${p.price.toLocaleString()}đ</span>
+        <button class="btn-primary" onclick="addToCart('${p.id}','${p.name}',${p.price},'${p.img}')">Thêm</button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// Commit: Lọc theo category
+function filterMenu(cat) {
+  currentFilter = cat;
+  if (cat === 'all') {
+    currentProducts = [...allProducts];
+  } else {
+    currentProducts = allProducts.filter(p => p.category === cat);
+  }
+  renderMenu(currentProducts);
+}
+
+// Commit: Sắp xếp theo giá
+function sortMenu(type) {
+  let sorted = [...currentProducts];
+  if (type === 'asc') {
+    sorted.sort((a,b) => a.price - b.price);
+  } else if (type === 'desc') {
+    sorted.sort((a,b) => b.price - a.price);
+  } else {
+    // Commit: trở lại thứ tự ban đầu theo filter
+    filterMenu(currentFilter);
+    return;
+  }
+  renderMenu(sorted);
+}
+
+// Commit: Khi load trang, gọi API /products
+document.addEventListener('DOMContentLoaded', () => {
+  fetch(API_URL + '/products')
+    .then(res => res.json())
+    .then(data => {
+      allProducts = data;
+      currentProducts = [...allProducts];
+      renderMenu(currentProducts);
+    })
+    .catch(err => {
+      console.error(err);
+      const grid = document.getElementById('menu-grid');
+      grid.innerHTML = '<p class="card-sub">Không tải được menu. Nhớ chạy JSON Server nha bé ~</p>';
+    });
+});
+</script>
+</body>
+</html>
