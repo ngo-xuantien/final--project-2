@@ -1,114 +1,136 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>About - Trà Sữa MoMo</title>
-  <link rel="stylesheet" href="style.css"/>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>About - Trà Sữa MoMo</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="nav-inner">
+        <div class="logo-wrap">
+          <div class="logo-dot"></div>
+          <span>Trà Sữa MoMo</span>
+        </div>
+        <nav class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="menu.html">Menu</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="login.html">Login</a>
+          <!-- AUTH UI -->
+          <span id="user-name" style="font-size: 13px; color: #666"></span>
+          <button
+            id="logout-btn"
+            class="btn-text"
+            style="display: none"
+            onclick="logout()"
+          >
+            Đăng xuất
+          </button>
+        </nav>
+      </div>
+    </header>
 
-<header class="header">
-  <div class="nav-inner">
-    <div class="logo-wrap">
-      <div class="logo-dot"></div>
-      <span>Trà Sữa MoMo</span>
-    </div>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="menu.html">Menu</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="login.html">Login</a>
-      <a href="admin-products.html" class="badge">Admin</a>
-      <button id="open-cart" class="cart-btn">
-        🛒 <span id="cart-count">0</span>
-      </button>
-    </nav>
-  </div>
-</header>
+    <main class="container">
+      <div class="section-header">
+        <div>
+          <h2>Về Trà Sữa MoMo</h2>
+          <p>Những ly trà nhỏ xíu, niềm vui to bự 💗</p>
+        </div>
+      </div>
 
-<main class="container">
-  <div class="section-header">
-    <div>
-      <h2>Về Trà Sữa MoMo</h2>
-      <p>Những ly trà nhỏ xíu, niềm vui to bự 💗</p>
-    </div>
-  </div>
-  <section class="card">
-    <p><strong>Trà Sữa MoMo</strong> được sinh ra với mong muốn mang đến cho bạn những ly trà sữa “vừa miệng” – không quá ngọt, không quá béo, nhưng lại đầy đủ topping vui miệng.</p>
-    <p class="card-sub">Chúng mình chọn nguyên liệu kỹ, nấu trà mỗi ngày, và luôn thử nghiệm hương vị mới để không làm bạn chán.</p>
-  </section>
-  <section style="margin-top:18px;" class="grid">
-    <article class="card">
-      <h3 class="card-title">Chất lượng</h3>
-      <p class="card-sub">Nguyên liệu được chọn lọc, nấu theo chuẩn, đảm bảo tươi mới.</p>
-    </article>
-    <article class="card">
-      <h3 class="card-title">Sáng tạo</h3>
-      <p class="card-sub">Menu được cập nhật theo mùa, có món giới hạn chỉ bán vài tuần.</p>
-    </article>
-    <article class="card">
-      <h3 class="card-title">Trải nghiệm</h3>
-      <p class="card-sub">Không chỉ ngon mà còn nhanh, tiện, dễ đặt, dễ trò chuyện.</p>
-    </article>
-  </section>
-</main>
+      <section class="card">
+        <p>
+          <strong>Trà Sữa MoMo</strong> được sinh ra với mong muốn mang đến cho
+          bạn những ly trà sữa “vừa miệng” – không quá ngọt, không quá béo,
+          nhưng lại đầy đủ topping vui miệng.
+        </p>
+        <p class="card-sub">
+          Chúng mình chọn nguyên liệu kỹ, nấu trà mỗi ngày, và luôn thử nghiệm
+          hương vị mới để không làm bạn chán.
+        </p>
+      </section>
 
-<footer class="footer">
-  <div class="footer-inner">
-    <div>
-      <strong>Trà Sữa MoMo</strong><br/>
-      65 Nguyễn Biểu, P1, Q5, TP.HCM<br/>
-      Hotline: 090-xxx-xxxx
-    </div>
-    <div style="text-align:right;">
-      Follow: Facebook · TikTok<br/>
-      Giờ mở cửa: 8:00 - 22:00
-    </div>
-  </div>
-</footer>
+      <section class="grid" style="margin-top: 18px">
+        <article class="card">
+          <h3 class="card-title">Chất lượng</h3>
+          <p class="card-sub">
+            Nguyên liệu được chọn lọc, nấu theo chuẩn, đảm bảo tươi mới.
+          </p>
+        </article>
 
+        <article class="card">
+          <h3 class="card-title">Sáng tạo</h3>
+          <p class="card-sub">
+            Menu được cập nhật theo mùa, có món giới hạn chỉ bán vài tuần.
+          </p>
+        </article>
 
-<!-- Commit: Nút mở/đóng cửa sổ chat MoMo Bot -->
-<button id="chatbot-btn">💬</button>
+        <article class="card">
+          <h3 class="card-title">Trải nghiệm</h3>
+          <p class="card-sub">
+            Không chỉ ngon mà còn nhanh, tiện, dễ đặt, dễ trò chuyện.
+          </p>
+        </article>
+      </section>
+    </main>
 
-<!-- Commit: Cửa sổ chat MoMo Bot -->
-<div id="chat-window">
-  <div id="chat-header">
-    <div class="chat-header-left">
-      <div class="bot-avatar">🧋</div>
-      <div>
-        <div class="bot-name">MoMo Bot</div>
-        <div class="bot-sub">bé MoMo online nè 🤗</div>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div>
+          <strong>Trà Sữa MoMo</strong><br />
+          65 Nguyễn Biểu, P1, Q5, TP.HCM<br />
+          Hotline: 090-xxx-xxxx
+        </div>
+        <div style="text-align: right">
+          Follow: Facebook · TikTok<br />
+          Giờ mở cửa: 8:00 - 22:00
+        </div>
+      </div>
+    </footer>
+
+    <!-- CHATBOT – GIỮ NGUYÊN -->
+    <button id="chatbot-btn">💬</button>
+
+    <div id="chat-window">
+      <div id="chat-header">
+        <div class="chat-header-left">
+          <div class="bot-avatar">🧋</div>
+          <div>
+            <div class="bot-name">MoMo Bot</div>
+            <div class="bot-sub">bé MoMo online nè 🤗</div>
+          </div>
+        </div>
+        <button id="voice-toggle">🔈</button>
+      </div>
+
+      <div id="chat-body">
+        <div class="bot-msg msg-with-avatar">
+          <div class="bot-avatar-small">🧋</div>
+          <div class="msg-bubble">
+            Dạ bé MoMo chàooo ~ Bạn muốn hỏi gì hong nè? 💗
+          </div>
+        </div>
+
+        <div id="faq-suggestions"></div>
+
+        <div id="typing-indicator" class="typing" style="display: none">
+          MoMo đang gõ trả lời cho bạn ...
+          <span class="dot"></span><span class="dot"></span
+          ><span class="dot"></span>
+        </div>
+      </div>
+
+      <div id="chat-input-box">
+        <input id="chat-input" placeholder="Nhắn gì đó với bé MoMo nè..." />
+        <button id="chat-send">Gửi</button>
       </div>
     </div>
-    <button id="voice-toggle" title="Bật/Tắt giọng nói">🔈</button>
-  </div>
 
-  <div id="chat-body">
-    <div class="bot-msg msg-with-avatar">
-      <div class="bot-avatar-small">🧋</div>
-      <div class="msg-bubble">Dạ bé MoMo chàooo ~ Bạn muốn hỏi gì hong nè? 💗</div>
-    </div>
-
-    <div id="faq-suggestions"></div>
-
-    <div id="typing-indicator" class="typing" style="display:none;">
-      MoMo đang gõ trả lời cho bạn ...
-      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-    </div>
-  </div>
-
-  <div id="chat-input-box">
-    <input id="chat-input" placeholder="Nhắn gì đó với bé MoMo nè..." />
-    <button id="chat-send">Gửi</button>
-  </div>
-</div>
-
-<link rel="stylesheet" href="chatbot.css">
-<script src="chatbot.js"></script>
-
-<script src="script.js"></script>
-</body>
+    <link rel="stylesheet" href="./css/chatbot.css" />
+    <script src="./js/auth.js"></script>
+    <script src="./js/chatbot.js"></script>
+  </body>
 </html>

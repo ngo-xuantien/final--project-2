@@ -1,244 +1,125 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Admin Products - Trà Sữa MoMo</title>
-  <link rel="stylesheet" href="style.css"/>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Admin - Trà Sữa MoMo</title>
 
-<header class="header">
-  <div class="nav-inner">
-    <div class="logo-wrap">
-      <div class="logo-dot"></div>
-      <span>Trà Sữa MoMo</span>
-    </div>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="menu.html">Menu</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="login.html">Login</a>
-      <a href="admin-products.html" class="badge">Admin</a>
-      <button id="open-cart" class="cart-btn">
-        🛒 <span id="cart-count">0</span>
-      </button>
-    </nav>
-  </div>
-</header>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/chatbot.css" />
+  </head>
+  <body>
+    <!-- HEADER (GIỐNG CÁC TRANG KHÁC) -->
+    <header class="header">
+      <div class="nav-inner">
+        <div class="logo-wrap">
+          <div class="logo-dot"></div>
+          <span>Trà Sữa MoMo</span>
+        </div>
+        <nav class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="menu.html">Menu</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
 
-<main class="container">
-  <div class="section-header">
-    <div>
-      <h2>Admin sản phẩm</h2>
-      <p>Quản lý menu MoMo (JSON Server)</p>
-    </div>
-  </div>
-  <section class="card">
-    <h3 class="card-title">Thêm / sửa sản phẩm</h3>
-    <form id="product-form">
-      <input type="hidden" id="product-id"/>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <input id="product-name" required placeholder="Tên sản phẩm" style="flex:2;padding:8px;border-radius:8px;border:1px solid #eee;"/>
-        <input id="product-price" required type="number" placeholder="Giá" style="flex:1;padding:8px;border-radius:8px;border:1px solid #eee;"/>
+          <!-- AUTH -->
+          <span id="user-name" style="font-size: 13px; color: #666"></span>
+          <button
+            id="logout-btn"
+            class="btn-text"
+            style="display: none"
+            onclick="logout()"
+          >
+            Đăng xuất
+          </button>
+        </nav>
       </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
-        <input id="product-img" placeholder="Đường dẫn ảnh (SVG/JPG)" style="flex:2;padding:8px;border-radius:8px;border:1px solid #eee;"/>
-        <select id="product-cat" style="flex:1;padding:8px;border-radius:8px;border:1px solid #eee;">
-          <option value="milk">Trà sữa</option>
-          <option value="fruit">Trà trái cây</option>
-          <option value="signature">Signature</option>
-          <option value="topping">Topping</option>
-        </select>
+    </header>
+
+    <!-- MAIN -->
+    <main class="container" style="max-width: 720px">
+      <!-- SECTION HEADER -->
+      <div class="section-header">
+        <div>
+          <h2>Quản lý sản phẩm</h2>
+          <p>Thêm món mới vào menu nhà MoMo 🧋</p>
+        </div>
       </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
-        <textarea id="product-desc" placeholder="Mô tả (optional)" style="flex:2;padding:8px;border-radius:8px;border:1px solid #eee;min-height:60px;"></textarea>
-        <select id="product-tag" style="flex:1;padding:8px;border-radius:8px;border:1px solid #eee;">
-          <option value="">Không tag</option>
-          <option value="Best seller">Best seller</option>
-          <option value="Signature">Signature</option>
-          <option value="Hot">Hot</option>
-          <option value="New">New</option>
-        </select>
+
+      <!-- CARD FORM -->
+      <section class="card">
+        <form id="product-form">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px">
+            <input id="product-name" required placeholder="Tên sản phẩm" />
+            <input
+              id="product-price"
+              type="number"
+              required
+              placeholder="Giá (VNĐ)"
+            />
+          </div>
+
+          <input
+            id="product-img"
+            placeholder="Đường dẫn ảnh (assets/img/...)"
+            style="margin-top: 12px"
+          />
+
+          <div
+            style="
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 12px;
+              margin-top: 12px;
+            "
+          >
+            <select id="product-cat">
+              <option value="milk">Trà sữa</option>
+              <option value="fruit">Trà trái cây</option>
+              <option value="signature">Signature</option>
+              <option value="topping">Topping</option>
+            </select>
+
+            <select id="product-tag">
+              <option value="">Không tag</option>
+              <option value="Best seller">Best seller</option>
+              <option value="Hot">Hot</option>
+              <option value="New">New</option>
+            </select>
+          </div>
+
+          <textarea
+            id="product-desc"
+            placeholder="Mô tả sản phẩm"
+            style="margin-top: 12px"
+          ></textarea>
+
+          <button class="btn-primary" type="submit" style="margin-top: 16px">
+            Thêm sản phẩm
+          </button>
+        </form>
+      </section>
+    </main>
+
+    <!-- FOOTER (GIỐNG CÁC TRANG KHÁC) -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div>
+          <strong>Trà Sữa MoMo</strong><br />
+          65 Nguyễn Biểu, P1, Q5, TP.HCM
+        </div>
+        <div style="text-align: right">Giờ mở cửa: 8:00 - 22:00</div>
       </div>
-      <div style="margin-top:10px;display:flex;gap:8px;">
-        <button class="btn-primary" type="submit">Lưu</button>
-        <button class="btn-text" type="button" onclick="resetProductForm()">Reset</button>
-      </div>
-      <p class="card-sub" id="admin-msg" style="margin-top:8px;"></p>
-    </form>
-  </section>
+    </footer>
 
-  <section class="card" style="margin-top:16px;">
-    <h3 class="card-title">Danh sách sản phẩm</h3>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th><th>Tên</th><th>Giá</th><th>Loại</th><th>Tag</th><th>Ảnh</th><th>Action</th>
-        </tr>
-      </thead>
-      <tbody id="product-table-body"></tbody>
-    </table>
-  </section>
-</main>
+    <!-- CHATBOT -->
+    <button id="chatbot-btn">💬</button>
+    <div id="chat-window"></div>
 
-<footer class="footer">
-  <div class="footer-inner">
-    <div>
-      <strong>Trà Sữa MoMo</strong><br/>
-      65 Nguyễn Biểu, P1, Q5, TP.HCM<br/>
-      Hotline: 090-xxx-xxxx
-    </div>
-    <div style="text-align:right;">
-      Follow: Facebook · TikTok<br/>
-      Giờ mở cửa: 8:00 - 22:00
-    </div>
-  </div>
-</footer>
-
-
-<!-- Commit: Nút mở/đóng cửa sổ chat MoMo Bot -->
-<button id="chatbot-btn">💬</button>
-
-<!-- Commit: Cửa sổ chat MoMo Bot -->
-<div id="chat-window">
-  <div id="chat-header">
-    <div class="chat-header-left">
-      <div class="bot-avatar">🧋</div>
-      <div>
-        <div class="bot-name">MoMo Bot</div>
-        <div class="bot-sub">bé MoMo online nè 🤗</div>
-      </div>
-    </div>
-    <button id="voice-toggle" title="Bật/Tắt giọng nói">🔈</button>
-  </div>
-
-  <div id="chat-body">
-    <div class="bot-msg msg-with-avatar">
-      <div class="bot-avatar-small">🧋</div>
-      <div class="msg-bubble">Dạ bé MoMo chàooo ~ Bạn muốn hỏi gì hong nè? 💗</div>
-    </div>
-
-    <div id="faq-suggestions"></div>
-
-    <div id="typing-indicator" class="typing" style="display:none;">
-      MoMo đang gõ trả lời cho bạn ...
-      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-    </div>
-  </div>
-
-  <div id="chat-input-box">
-    <input id="chat-input" placeholder="Nhắn gì đó với bé MoMo nè..." />
-    <button id="chat-send">Gửi</button>
-  </div>
-</div>
-
-<link rel="stylesheet" href="chatbot.css">
-<script src="chatbot.js"></script>
-
-<script src="script.js"></script>
-<script>
-const adminMsg = document.getElementById('admin-msg');
-const productTBody = document.getElementById('product-table-body');
-const productForm = document.getElementById('product-form');
-
-function setAdminMsg(text) {
-  adminMsg.textContent = text || '';
-}
-
-function resetProductForm() {
-  productForm.reset();
-  document.getElementById('product-id').value = '';
-}
-
-function loadProducts() {
-  fetch(API_URL + '/products')
-    .then(res => res.json())
-    .then(data => {
-      productTBody.innerHTML = '';
-      data.forEach(p => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${p.id}</td>
-          <td>${p.name}</td>
-          <td>${p.price.toLocaleString()}đ</td>
-          <td>${p.category}</td>
-          <td>${p.tag || ''}</td>
-          <td><span class="card-sub">${p.img}</span></td>
-          <td>
-            <button class="btn-text" onclick="editProduct(${p.id})">Sửa</button>
-            |
-            <button class="btn-text" onclick="deleteProduct(${p.id})">Xóa</button>
-          </td>
-        `;
-        productTBody.appendChild(tr);
-      });
-    })
-    .catch(err => {
-      console.error(err);
-      setAdminMsg('Không tải được sản phẩm. Nhớ chạy JSON Server nha bé.');
-    });
-}
-
-function editProduct(id) {
-  fetch(API_URL + '/products/' + id)
-    .then(res => res.json())
-    .then(p => {
-      document.getElementById('product-id').value = p.id;
-      document.getElementById('product-name').value = p.name;
-      document.getElementById('product-price').value = p.price;
-      document.getElementById('product-img').value = p.img;
-      document.getElementById('product-cat').value = p.category;
-      document.getElementById('product-desc').value = p.description || '';
-      document.getElementById('product-tag').value = p.tag || '';
-    });
-}
-
-function deleteProduct(id) {
-  if (!confirm('Xóa sản phẩm #' + id + ' hả bé?')) return;
-  fetch(API_URL + '/products/' + id, { method:'DELETE' })
-    .then(() => {
-      setAdminMsg('Đã xóa sản phẩm #' + id);
-      loadProducts();
-    })
-    .catch(err => {
-      console.error(err);
-      setAdminMsg('Không xóa được sản phẩm. Kiểm tra JSON Server nha.');
-    });
-}
-
-productForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const id = document.getElementById('product-id').value;
-  const body = {
-    name: document.getElementById('product-name').value,
-    price: Number(document.getElementById('product-price').value),
-    img: document.getElementById('product-img').value || 'assets/img/momo_signature.svg',
-    category: document.getElementById('product-cat').value,
-    description: document.getElementById('product-desc').value,
-    tag: document.getElementById('product-tag').value || undefined
-  };
-  const method = id ? 'PUT' : 'POST';
-  const url = id ? (API_URL + '/products/' + id) : (API_URL + '/products');
-  fetch(url, {
-    method,
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify(body)
-  })
-    .then(res => res.json())
-    .then(p => {
-      setAdminMsg('Đã lưu sản phẩm #' + p.id + ' thành công.');
-      resetProductForm();
-      loadProducts();
-    })
-    .catch(err => {
-      console.error(err);
-      setAdminMsg('Không lưu được sản phẩm.');
-    });
-});
-
-document.addEventListener('DOMContentLoaded', loadProducts);
-</script>
-</body>
+    <!-- JS -->
+    <script src="./js/data.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/admin.local.js"></script>
+    <script src="./js/chatbot.js"></script>
+  </body>
 </html>

@@ -1,0 +1,251 @@
+// ===============================
+// DATA MẶC ĐỊNH (KHỞI TẠO 1 LẦN)
+// ===============================
+const DEFAULT_PRODUCTS = [
+  {
+    id: 1,
+    name: "Trà Sữa MoMo",
+    price: 60000,
+    img: "assets/img/momo_signature.svg",
+    category: "milk",
+    description: "Trà đen ủ lạnh, sữa thơm béo nhẹ, topping trân châu đen.",
+    tag: "Signature",
+  },
+  {
+    id: 2,
+    name: "Trà Sữa Trân Châu Đen",
+    price: 55000,
+    img: "assets/img/milk_tea_2.svg",
+    category: "milk",
+    description: "Đậm vị trà, trân châu đen dai mềm, chuẩn vị quốc dân.",
+    tag: "Best seller",
+  },
+  {
+    id: 3,
+    name: "Trà Sữa Trân Châu Trắng",
+    price: 55000,
+    img: "assets/img/milk_tea_1.svg",
+    category: "milk",
+    description: "Trà sữa béo nhẹ, trân châu trắng giòn giòn vui miệng.",
+    tag: "Hot",
+  },
+  {
+    id: 4,
+    name: "Trà Sữa Kem Cheese",
+    price: 65000,
+    img: "assets/img/milk_tea_3.svg",
+    category: "milk",
+    description: "Lớp kem cheese mặn mặn béo béo, uống là ghiền.",
+    tag: "New",
+  },
+  {
+    id: 5,
+    name: "Hồng Trà Sữa",
+    price: 52000,
+    img: "assets/img/milk_tea_4.svg",
+    category: "milk",
+    description: "Hồng trà thơm, vị thanh, ít ngọt.",
+  },
+  {
+    id: 6,
+    name: "Lục Trà Sữa",
+    price: 52000,
+    img: "assets/img/milk_tea_5.svg",
+    category: "milk",
+    description: "Lục trà nhẹ nhàng, phù hợp người thích vị trà rõ.",
+  },
+  {
+    id: 7,
+    name: "Trà Sữa Khoai Môn",
+    price: 58000,
+    img: "assets/img/milk_tea_6.svg",
+    category: "milk",
+    description: "Mùi khoai môn thơm, màu tím xinh xắn.",
+    tag: "Hot",
+  },
+  {
+    id: 8,
+    name: "Trà Sữa Socola",
+    price: 58000,
+    img: "assets/img/milk_tea_2.svg",
+    category: "milk",
+    description: "Vị socola thơm, phù hợp team hảo ngọt.",
+  },
+  {
+    id: 9,
+    name: "Trà Sữa Caramel",
+    price: 59000,
+    img: "assets/img/milk_tea_3.svg",
+    category: "milk",
+    description: "Caramel thơm lừng, béo ngọt vừa phải.",
+  },
+  {
+    id: 10,
+    name: "Matcha Macchiato",
+    price: 69000,
+    img: "assets/img/milk_tea_5.svg",
+    category: "milk",
+    description: "Matcha Nhật, lớp kem macchiato béo mịn.",
+    tag: "Best seller",
+  },
+  {
+    id: 11,
+    name: "Trà Đào MoMo",
+    price: 55000,
+    img: "assets/img/fruit_1.svg",
+    category: "fruit",
+    description: "Trà đào chua ngọt cân bằng, có miếng đào mềm.",
+    tag: "Best seller",
+  },
+  {
+    id: 12,
+    name: "Trà Vải",
+    price: 55000,
+    img: "assets/img/fruit_2.svg",
+    category: "fruit",
+    description: "Trà vải thơm nhẹ, mát, dễ uống.",
+  },
+  {
+    id: 13,
+    name: "Trà Chanh Leo",
+    price: 52000,
+    img: "assets/img/fruit_3.svg",
+    category: "fruit",
+    description: "Chua nhẹ từ chanh leo, giải khát cực tốt.",
+  },
+  {
+    id: 14,
+    name: "Trà Cam Sả",
+    price: 52000,
+    img: "assets/img/fruit_4.svg",
+    category: "fruit",
+    description: "Vị cam tươi, sả thơm, uống không bị ngán.",
+    tag: "Hot",
+  },
+  {
+    id: 15,
+    name: "Trà Dâu Tây",
+    price: 55000,
+    img: "assets/img/fruit_5.svg",
+    category: "fruit",
+    description: "Vị dâu tây ngọt thơm, màu hồng xinh xắn.",
+  },
+  {
+    id: 16,
+    name: "Trà Táo Bạc Hà",
+    price: 52000,
+    img: "assets/img/fruit_6.svg",
+    category: "fruit",
+    description: "Thanh mát, thơm mùi táo, chút the bạc hà.",
+  },
+  {
+    id: 17,
+    name: "Trà Nho Đen",
+    price: 55000,
+    img: "assets/img/fruit_7.svg",
+    category: "fruit",
+    description: "Vị nho đậm, màu sắc bắt mắt.",
+  },
+  {
+    id: 19,
+    name: "Sữa Tươi Trân Châu Đường Đen",
+    price: 65000,
+    img: "assets/img/sig_1.svg",
+    category: "signature",
+    description: "Sữa tươi lạnh, trân châu đường đen dẻo mềm, thơm lừng.",
+    tag: "Hot",
+  },
+  {
+    id: 20,
+    name: "Latte Gạo Rang",
+    price: 65000,
+    img: "assets/img/sig_2.svg",
+    category: "signature",
+    description: "Mùi gạo rang thơm, vị béo nhẹ, lạ miệng.",
+    tag: "New",
+  },
+  {
+    id: 21,
+    name: "Trà Sữa Bánh Flan",
+    price: 62000,
+    img: "assets/img/sig_3.svg",
+    category: "signature",
+    description: "Kết hợp trà sữa và flan mềm, ngọt ngào.",
+  },
+  {
+    id: 22,
+    name: "Trà Sữa Dừa Nướng",
+    price: 63000,
+    img: "assets/img/sig_4.svg",
+    category: "signature",
+    description: "Dừa nướng thơm, vị béo lạ, hợp team thích béo.",
+  },
+  {
+    id: 23,
+    name: "Hồng Trà Cháy",
+    price: 60000,
+    img: "assets/img/sig_5.svg",
+    category: "signature",
+    description: "Hương vị rang cháy nhẹ, thơm đặc biệt.",
+  },
+  {
+    id: 24,
+    name: "Trân Châu Đen",
+    price: 12000,
+    img: "assets/img/topping_1.svg",
+    category: "topping",
+    description: "Hạt trân châu đen dai mềm.",
+    tag: "Best seller",
+  },
+  {
+    id: 25,
+    name: "Pudding Trứng",
+    price: 15000,
+    img: "assets/img/topping_2.svg",
+    category: "topping",
+    description: "Pudding trứng mềm mịn, thơm béo.",
+  },
+  {
+    id: 26,
+    name: "Thạch Phô Mai",
+    price: 15000,
+    img: "assets/img/topping_3.svg",
+    category: "topping",
+    description: "Thạch mềm, nhân phô mai mặn nhẹ.",
+  },
+  {
+    id: 27,
+    name: "Popping Boba",
+    price: 18000,
+    img: "assets/img/topping_4.svg",
+    category: "topping",
+    description: "Hạt nổ vị trái cây, vui miệng.",
+    tag: "Hot",
+  },
+  {
+    id: 28,
+    name: "Flan",
+    price: 20000,
+    img: "assets/img/topping_5.svg",
+    category: "topping",
+    description: "Bánh flan mềm, hợp trà sữa.",
+  },
+];
+
+// ===============================
+// LOCAL STORAGE HANDLER
+// ===============================
+function initProducts() {
+  if (!localStorage.getItem("products")) {
+    localStorage.setItem("products", JSON.stringify(DEFAULT_PRODUCTS));
+  }
+}
+
+function getProducts() {
+  initProducts();
+  return JSON.parse(localStorage.getItem("products"));
+}
+
+function saveProducts(products) {
+  localStorage.setItem("products", JSON.stringify(products));
+}
