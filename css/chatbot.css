@@ -2,7 +2,7 @@
    CHATBOT UI
    ============================ */
 #chatbot-btn{
-  position:fixed;
+  position:fixed; 
   right:18px;
   bottom:18px;
   width:54px;
